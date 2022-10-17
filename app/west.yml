@@ -16,7 +16,7 @@ manifest:
 
     - name: module-mbus
       url: https://github.com/addiva-elektronik/zephyr-mbus-module
-      revision: module-refactor
+      revision: main
       path: modules/lib/mbus
 
   self:

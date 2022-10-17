@@ -1,5 +1,0 @@
-* An application for a sample Zephyr module
-
-  This is a manifest and a sample application repository used for
-  describing how Zephyr module works.  For more detail please vist [[https://github.com/yashi/module-sample][the
-  library repository]].

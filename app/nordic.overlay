@@ -1,0 +1,12 @@
+&uart1 {
+        compatible = "nordic,nrf-uarte";
+        label = "mbus0";
+        current-speed = <2400>;
+        status = "okay";
+};
+
+/ {
+        aliases {
+                mbus0 = &uart1;
+        };
+};

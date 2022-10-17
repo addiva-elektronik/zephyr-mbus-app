@@ -1,21 +1,23 @@
+# See the west documentation for more information:
+#
+# https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/guides/west/index.html
+
 manifest:
+  # This west.yml requires west 0.12s or later, because the "import"
+  # feature used below was introduced then.
+  version: 0.12
 
+  # List of git repositories which make up the application
   projects:
-    - name: zephyr
-      url: https://github.com/zephyrproject-rtos/zephyr
-      revision: main
-      path: zephyr
-      west-commands: scripts/west-commands.yml
+    - name: nrf
+      url: https://github.com/nrfconnect/sdk-nrf
+      revision: v2.1.0
+      import: true
 
-    - name: cmsis
-      url: https://github.com/zephyrproject-rtos/cmsis
-      revision: b0612c97c1401feeb4160add6462c3627fe90fc7
-      path: modules/hal/cmsis
-
-    - name: module-sample
-      url: https://github.com/yashi/module-sample
-      revision: main
-      path: modules/lib/sample
+    - name: module-mbus
+      url: https://github.com/addiva-elektronik/zephyr-mbus-module
+      revision: module-refactor
+      path: modules/lib/mbus
 
   self:
-    path: module-app
+    path: mbus-app

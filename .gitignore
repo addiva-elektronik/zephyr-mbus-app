@@ -1,1 +1,11 @@
 *~
+.west
+app/build/
+bootloader/
+mbedtls/
+modules/
+nrf/
+nrfxlib/
+test/
+tools/
+zephyr/

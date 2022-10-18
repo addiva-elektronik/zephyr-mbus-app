@@ -1,0 +1,50 @@
+name: Bob the Builder
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/markosagadin/ncs-docker-setup/ncs-v1.8.0-docky:latest
+      options: --user root
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache NCS modules
+        env:
+          cache-name: cache-ncs-modules
+        with:
+          path: |
+            modules
+            nrf
+            nrfxlib
+            tools
+            zephyr
+          key: ${{ runner.os }}-build-v2-${{ env.cache-name }}-${{ hashFiles('project/west.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Initialize West Manifest
+        run: |
+          west init -l app
+
+      - name: Build Firmware
+        run: |
+          cd app
+          build -c -b nrf5340dk_nrf5340_cpuapp -- -DDTC_OVERLAY_FILE=nordic.overlay
+
+      - name: Archive Firmware
+        uses: actions/upload-artifact@v2
+        with:
+          name: firmware
+          path: app/build/zephyr/zephyr.*

@@ -17,6 +17,7 @@ Clone this repository and `cd` into it, we use
 Then follow the next three steps:
 
      west init -l app
+     west update
      source env.sh
      cd app/
 

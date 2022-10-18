@@ -3,21 +3,87 @@
 # https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/guides/west/index.html
 
 manifest:
-  # This west.yml requires west 0.12s or later, because the "import"
-  # feature used below was introduced then.
-  version: 0.12
+  self:
+    path: mbus-app
 
   # List of git repositories which make up the application
   projects:
     - name: nrf
       url: https://github.com/nrfconnect/sdk-nrf
+      # IMPORTANT: When changing NCS revision you need to sync the
+      # revision of the Zephyr project below so it matches.
       revision: v2.1.0
-      import: true
+      import:
+        name-allowlist:
+          # Ignore NCS private repos, keep this list sorted alphabetically.
+          #- cirrus
+          #- cjson
+          #- cmock
+          #- find-my
+          #- homekit
+          #- matter
+          #- mbedtls-nrf
+          #- mcuboot
+          #- memfault-firmware-sdk
+          #- nrf-802154
+          - nrfxlib
+          - openthread
+          #- sdk-lc3
+          #- tfm-mcuboot
+          #- trusted-firmware-m
+          #- unity
+          #- zcbor
+          # Ignore zephyr as it is added below manually (to filter)
+          # - zephyr
 
-    - name: module-mbus
+    - name: zephyr
+      url: https://github.com/nrfconnect/sdk-zephyr
+      revision: v3.1.99-ncs1
+      import:
+        # In addition to the zephyr repository itself, NCS also imports
+        # the contents of zephyr/west.yml at the above revision. Only
+        # the projects explicitly named in the following allowlist are
+        # imported.
+        #
+        # Note that the zephyr west extensions (like 'build', 'flash',
+        # 'debug', etc.) are automatically provided by this import, so
+        # there's no need to add a redundant west-commands: key for
+        # the zephyr project.
+        #
+        # Please keep this list sorted alphabetically.
+        name-allowlist:
+          #- TraceRecorderSource
+          #- canopennode
+          #- chre
+          #- civetweb
+          - cmsis
+          #- edtt
+          #- fatfs
+          #- fff
+          - hal_nordic
+          #- hal_st  # Hal for ST's sensors, not for MCU's
+          #- liblc3codec
+          #- libmetal
+          - littlefs
+          - loramac-node
+          #- lvgl
+          #- lz4
+          #- mbedtls
+          #- mipi-sys-t
+          #- nanopb
+          - net-tools
+          - nrf_hw_models
+          #- open-amp
+          #- picolibc
+          #- psa-arch-tests
+          #- segger
+          #- tinycbor
+          #- tinycrypt
+          #- tf-m-tests
+          #- zscbor
+          #- zscilib
+
+    - name: mbus
       url: https://github.com/addiva-elektronik/zephyr-mbus-module
       revision: main
       path: modules/lib/mbus
-
-  self:
-    path: mbus-app

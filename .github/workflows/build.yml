@@ -42,7 +42,7 @@ jobs:
       - name: Build Firmware
         run: |
           cd app
-          build -c -b nrf5340dk_nrf5340_cpuapp -- -DDTC_OVERLAY_FILE=nordic.overlay
+          west build -c -b nrf5340dk_nrf5340_cpuapp -- -DDTC_OVERLAY_FILE=nordic.overlay
 
       - name: Archive Firmware
         uses: actions/upload-artifact@v2

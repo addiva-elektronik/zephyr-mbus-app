@@ -85,5 +85,5 @@ manifest:
 
     - name: mbus
       url: https://github.com/addiva-elektronik/zephyr-mbus-module
-      revision: v0.2.0
+      revision: main
       path: modules/lib/mbus

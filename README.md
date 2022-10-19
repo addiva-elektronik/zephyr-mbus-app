@@ -2,6 +2,10 @@ M-Bus for Zephyr/nRF
 ====================
 
 This Zephyr M-Bus application is currently biased towards the nRF SDK.
+Most of this repository is simply boiler plate to include the [Zephyr
+M-Bus module][1].  When trying out, make sure to use matching versions
+of the two.
+
 
 Initial Set Up
 --------------
@@ -51,3 +55,5 @@ Flash the Application
 
 You can now use ttyACM0 to connect to your M-Bus and ttyACM1 is the
 Zephyr command shell with an `mbus` family of commands available.
+
+[1]: https://github.com/addiva-elektronik/zephyr-mbus-app

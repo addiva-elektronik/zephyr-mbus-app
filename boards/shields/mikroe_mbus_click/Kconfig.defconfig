@@ -1,0 +1,25 @@
+# Copyright (c) 2022 Addiva Elektronik AB
+# SPDX-License-Identifier: Apache-2.0
+
+if SHIELD_MIKROE_MBUS_CLICK
+
+config SERIAL
+	default y
+
+#config UART_1_NRF_PARITY_BIT
+#	default y
+
+config UART_INTERRUPT_DRIVEN
+	default y
+
+#config UART_LINE_CTRL
+#	default n
+
+config RING_BUFFER
+	default y
+
+# XXX: enable when migrating to zephyr-mbus-module in west.yml
+# config LIBMBUS
+# 	default y
+
+endif # SHIELD_MIKROE_MBUS_CLICK

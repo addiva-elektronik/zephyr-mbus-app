@@ -1,0 +1,33 @@
+/*
+ * Copyright (c) 2022 Addiva Elektronik AB
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/*
+&arduino_serial {
+	status = "okay";
+
+	mbus0 {
+	        compatible = "zephyr,mbus-serial";
+        	label = "mbus0";
+		current-speed = <2400>;
+		status = "okay";
+	};
+};
+*/
+
+// Using this for now, the above is the correct way (like modbus0)
+// to do it but doesn't work atm.
+&uart1 {
+        compatible = "nordic,nrf-uarte";
+        label = "mbus0";
+        current-speed = <2400>;
+        status = "okay";
+};
+
+/ {
+        aliases {
+                mbus0 = &uart1;
+        };
+};

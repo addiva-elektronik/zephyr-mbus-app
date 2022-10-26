@@ -19,7 +19,7 @@ config RING_BUFFER
 	default y
 
 # XXX: enable when migrating to zephyr-mbus-module in west.yml
-# config LIBMBUS
+# config MBUS
 # 	default y
 
 endif # SHIELD_MIKROE_MBUS_CLICK

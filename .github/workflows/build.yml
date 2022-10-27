@@ -1,35 +1,33 @@
 name: Bob the Builder
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
+# Update cache path: with west modules on changes to project.
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/markosagadin/ncs-docker-setup/ncs-v1.8.0-docky:latest
-      options: --user root
+    container: nordicplayground/nrfconnect-sdk:v2.1-branch
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache NCS modules
+      - name: Cache West Modules
         uses: actions/cache@v2
         env:
-          cache-name: cache-ncs-modules
+          cache-name: cache-west-modules
         with:
           path: |
+            bootloader
+            mbedtls
             modules
             nrf
             nrfxlib
+            test
             tools
             zephyr
-          key: ${{ runner.os }}-build-v2-${{ env.cache-name }}-${{ hashFiles('project/west.yml') }}
+          key: ${{ runner.os }}-build-v2-${{ env.cache-name }}-${{ hashFiles('app/west.yml') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
@@ -38,6 +36,7 @@ jobs:
       - name: Initialize West Manifest
         run: |
           west init -l app
+          west update --narrow -o=--depth=1
 
       - name: Build Firmware
         run: |

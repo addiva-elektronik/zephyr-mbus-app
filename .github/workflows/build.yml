@@ -14,10 +14,10 @@ jobs:
         - ${{ github.workspace }}:/workdir/project
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache West Modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-west-modules
         with:
@@ -47,7 +47,7 @@ jobs:
           west build -c -b nrf5340dk_nrf5340_cpuapp -- -DDTC_OVERLAY_FILE=nordic.overlay
 
       - name: Archive Firmware
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: firmware
           path: app/build/zephyr/zephyr.*

@@ -20,9 +20,10 @@ jobs:
         uses: actions/cache@v3
         id: west-cache
         env:
-          cache-name: cache-west-modules
+          cache-name: cache-manifest
         with:
           path: |
+            .west
             bootloader
             mbedtls
             modules

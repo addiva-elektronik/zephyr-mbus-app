@@ -18,6 +18,7 @@ jobs:
 
       - name: Cache West Modules
         uses: actions/cache@v3
+        id: west-cache
         env:
           cache-name: cache-west-modules
         with:
@@ -37,8 +38,12 @@ jobs:
             ${{ runner.os }}-
 
       - name: Initialize West Manifest
+        if: steps.west-cache.outputs.cache-hit != 'true'
         run: |
           west init -l app
+
+      - name: Update West Manifest
+        run: |
           west update --narrow -o=--depth=1
 
       - name: Build Firmware

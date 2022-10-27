@@ -8,7 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: nordicplayground/nrfconnect-sdk:v2.1-branch
+    container:
+      image: nordicplayground/nrfconnect-sdk:v2.1-branch
+      volumes:
+        - ${{ github.workspace }}:/workdir/project
     steps:
       - name: Checkout
         uses: actions/checkout@v2
